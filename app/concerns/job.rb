@@ -1,8 +1,14 @@
 class Job
+  BEANSTALK = Beanstalk::Pool.new(['127.0.0.1:11300']) rescue nil
+
   def initialize(data)
     if data.is_a?(Hash)
       @hash = data
-      enqeue!
+      if BEANSTALK.present?
+        enqeue!
+      else
+        perform!
+      end
     elsif data.is_a?(Beanstalk::Job)
       @job = data
       @hash = JSON.parse(data.body).symbolize_keys
@@ -30,7 +36,7 @@ class Job
       obj.send(action)
     end
 
-    @job.delete
+    @job.try(:delete)
   end
 
   def enqeue!
