@@ -15,10 +15,12 @@ class User < ActiveRecord::Base
   end
 
   def geocode!
+    sleep rand * 10   # geocoding is hard work, you know.
     geocode && save
   end
 
   def seed_initial_recommendations!
+    sleep rand * 20   # recommending is even harder!
     PointOfInterest.near(self, 5).each do |poi|
       self.recommendations.create(:point_of_interest => poi)
     end
