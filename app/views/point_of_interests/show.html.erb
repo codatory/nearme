@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Address:</b>
+  <%= @point_of_interest.address %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @point_of_interest.name %>
+</p>
+
+<p>
+  <b>Latitude:</b>
+  <%= @point_of_interest.latitude %>
+</p>
+
+<p>
+  <b>Longitude:</b>
+  <%= @point_of_interest.longitude %>
+</p>
+
+
+<%= link_to 'Edit', edit_point_of_interest_path(@point_of_interest) %> |
+<%= link_to 'Back', point_of_interests_path %>
