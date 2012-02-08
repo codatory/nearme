@@ -11,7 +11,7 @@ class PointOfInterest < ActiveRecord::Base
   end
 
   def recommend_to_nearby_people!
-    sleep rand * 20  # Recommending is even harder!
+    sleep rand * 4  # Recommending is even harder!
     User.near(self, 5).each do |u|
       u.recommendations.create(:point_of_interest => self)
     end
@@ -26,7 +26,7 @@ class PointOfInterest < ActiveRecord::Base
   end
 
   def geocode!
-    sleep rand * 10    # geocoding is hard work!
+    sleep rand * 2    # geocoding is hard work!
     geocode && save
   end
 
